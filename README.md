@@ -115,7 +115,7 @@ REM @call adb logcat -c
 REM @adb logcat -s "MYDEBUG" *:S
 ```
 
-# Final login hack
+## Final login hack
 
 All these hacks are handle by the ***apk-infinity*** app, so you do not
 need to do these changes manual.
@@ -125,7 +125,7 @@ The changes are in the following files.:
 * `\smali\com\amazonaws\mobileconnectors\cognitoidentityprovider\CognitoUser.smali`
 
 
-## CognitoUserSession.smali
+### CognitoUserSession.smali
 
 ``` c
 .method public final a()Ljava/lang/String;
@@ -149,7 +149,7 @@ The rest remains the same, but that code is not reached.
 The rest remains the same, but that code is not reached.
 ```
 
-## CognitoUser.smali
+### CognitoUser.smali
 
 * `.method public constructor <init>(Lcom/amazonaws/mobileconnectors/cognitoidentityprovider/CognitoUserPool;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/amazonaws/services/cognitoidentityprovider/AmazonCognitoIdentityProvider;Landroid/content/Context;)V`
 * `.method public final C()Lcom/amazonaws/mobileconnectors/cognitoidentityprovider/CognitoUserSession;`  
@@ -160,7 +160,7 @@ This is the `getSession()` routine.
 Both routines have been altered to insert static tokens that have a
 longer lifetime. When you want to change the tokens, look at `Tokens.py` to create the necessary tokens.
 
-### constructor
+#### constructor
 
 ``` c
 .method public constructor <init>(Lcom/amazonaws/mobileconnectors/cognitoidentityprovider/CognitoUserPool;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/amazonaws/services/cognitoidentityprovider/AmazonCognitoIdentityProvider;Landroid/content/Context;)V
@@ -210,7 +210,7 @@ longer lifetime. When you want to change the tokens, look at `Tokens.py` to crea
 .end method
 ```
 
-### getSession()
+#### getSession()
 
 ``` c
 .method public final s()Lcom/amazonaws/mobileconnectors/cognitoidentityprovider/CognitoUserSession;
@@ -334,7 +334,7 @@ longer lifetime. When you want to change the tokens, look at `Tokens.py` to crea
 .end method
 ```
 
-### getCachedSession()
+#### getCachedSession()
 
     .method public final C()Lcom/amazonaws/mobileconnectors/cognitoidentityprovider/CognitoUserSession;
         .locals 9
@@ -562,7 +562,14 @@ longer lifetime. When you want to change the tokens, look at `Tokens.py` to crea
         return-object v0
     .end method
 
-## Important files
+## Do not forget!
+Install the \home\joola\certs\ca.pem on your mobile phone as a CA certificate.
+* Samsung:
+Settings → Security and privacy → More security settings → Install from device storage → CA certificate
+* Google Pixel / standaard Android:
+Settings → Security & privacy → More security settings → Encryption & credentials → Install a certificate → CA certificate
+
+### Important files
 
 * `\smali\com\joolarobot\ipong\ui\b.smali`  
 This file helped me to find the connections. But did not need any changes.  
